@@ -1,0 +1,121 @@
+﻿Sarl SALEG
+MONTAGE ELECTRIQUE HT/MT/BT & GROUPE ELECTROGENES
+SARL AU CAPITALE SOCIAL : 20 100 000.00 DZD
+Siège Sociale : Coopérative Immobilière Essanaouber 1200 Logements Local N° : 01 Bab-Ezzouar ALGER
+Tél/Fax : 020 20 14 69 - Mobile : +213 661 300 972 / +213 662 163 223
+E-mail : sarlsaleg@yahoo.fr / sarlsaleg@hotmail.fr
+Le Gérant : M. SALMI Mohamd Lotfi
+
+
+
+
+
+
+
+
+
+
+
+
+PRÉSENTATION DE L’ENTREPRISE & PORTEFEUILLE DE SERVICES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. À propos de SALEG
+SALEG est une société algérienne spécialisée dans l’ingénierie des systèmes électriques industriels, couvrant les domaines Haute Tension (HT), Moyenne Tension (MT) et Basse Tension (BT).
+Nous proposons des services techniques complets, allant des études d’ingénierie à la mise en service, avec une expertise particulière dans :
+* Les centrales de production (notamment photovoltaïques), 
+* Les postes électriques HT/MT, 
+* L’intégration réseau et conformité Grid Code, 
+* Les systèmes de protection électrique. 
+Notre mission est d’accompagner les EPC et les maîtres d’ouvrage dans la réalisation d’installations électriques fiables, sécurisées et conformes aux exigences du réseau.
+2. Domaines d’expertise
+   1. Ingénierie des systèmes électriques
+* Études de flux de charge et court-circuit, 
+* Études de protection, coordination et sélectivité, 
+* Études de conformité Grid Code, 
+* Modélisation réseau (ETAP / DIgSILENT). 
+   1. Postes électriques HT/MT
+* Ingénierie et assistance à la conception des postes, 
+* Configuration des protections, 
+* Essais et mise en service, 
+* Interface avec l’exploitant réseau (SONELGAZ / GRTE). 
+   1. Énergies renouvelables (centrales PV)
+* Mise en service de la partie DC, 
+* Intégration des onduleurs, 
+* Synchronisation réseau, 
+* Validation des performances. 
+   1. Travaux d’installation
+* Montage et installation des postes HT, 
+* Installation des cellules MT, 
+* Installation des systèmes BT (auxiliaires), 
+* Supervision et gestion de chantier. 
+3. Portefeuille de services
+Nos services sont modulaires et adaptés aux besoins des projets EPC.
+   2. Mise en service de la partie DC (centrales PV)
+* Tests de continuité, polarité et isolement, 
+* Mesure des courbes I-V, 
+* Vérification des combiner boxes, 
+* Inspection thermographique, 
+* Mise sous tension DC et assistance au démarrage des onduleurs. 
+   1. Mise en service des postes HT
+* Tests fonctionnels des relais de protection, 
+* Vérification des interverrouillages, 
+* Essais secondaires, 
+* Procédures de mise sous tension, 
+* Assistance à la synchronisation réseau. 
+   1. Étude de conformité au Grid Code
+* Analyse tension / fréquence, 
+* Étude du comportement en défaut (LVRT / HVRT), 
+* Vérification des capacités de puissance réactive, 
+* Validation des protections de découplage, 
+* Élaboration de rapports pour validation SONELGAZ / GRTE. 
+   1. Installation des systèmes BT (avant-poste)
+* Installation des tableaux BT AC/DC, 
+* Tirage et raccordement de câbles, 
+* Mise en place des systèmes de mise à la terre, 
+* Éclairage et services auxiliaires. 
+   1. Installation des cellules MT
+* Installation des cellules MT, 
+* Assemblage des jeux de barres, 
+* Raccordement des câbles MT, 
+* Vérifications fonctionnelles et pré-commissioning. 
+   1. Montage & installation des postes HT
+* Installation des transformateurs de puissance, 
+* Montage des disjoncteurs, TC, TT, 
+* Réalisation des jeux de barres, 
+* Mise en place du réseau de terre, 
+* Finalisation mécanique et électrique. 
+   1. Étude de réglage, coordination et sélectivité des protections
+* Calculs de réglage des relais, 
+* Étude de coordination (courbes TCC), 
+* Analyse des courts-circuits, 
+* Vérification de la sélectivité, 
+* Optimisation des schémas de protection.

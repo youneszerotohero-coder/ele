@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8f4ef;
+  --surface: #fffaf6;
+  --surface-soft: #efe1dc;
+  --text: #5b544d;
+  --text-strong: #1f1a17;
+  --text-muted: #736b64;
+  --accent: #b22234;
+  --accent-strong: #8f1727;
+  --accent-cool: #bfd5d8;
+  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Syne', 'Trebuchet MS', sans-serif;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, #fcf8f2 0%, #f8f4ef 24%, #f7f1eb 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(191, 213, 216, 0.22), transparent 28%),
+    linear-gradient(180deg, #fcf8f2 0%, #f8f4ef 24%, #f7f1eb 100%);
+  color: var(--text);
+}
+
+body,
+button,
+a {
+  font-family: var(--font-body);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-strong);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: clamp(3.1rem, 7vw, 5.5rem);
+}
+
+h2 {
+  margin-bottom: 18px;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+button,
+a {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
