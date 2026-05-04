@@ -1,24 +1,47 @@
-export default function CTA() {
+import { Mail } from 'lucide-react';
+import { motion } from 'motion/react';
+import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
+
+export default function CTA({ content }) {
   return (
-    <section className=" py-32 flex justify-center items-center bg-black overflow-hidden">
-      <div className="media-hover-frame relative w-[95vw] md:w-[80vw] h-[20em] md:h-[25em] flex flex-col justify-center items-center text-center px-4">
-        <div
-          className="media-hover-scale absolute inset-0"
-          style={{ backgroundImage: "url('/cta.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-        ></div>
-        {/* Dark overlay to ensure text is readable against the background image */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-10 leading-tight">
-            Don't wait for your dreams! <br />
-            Make them with us now!
-          </h2>
-          <button className="bg-red-400 text-white font-bold px-8 py-4 text-sm hover:bg-red-500 transition-colors cursor-pointer">
-            Start a project
-          </button>
-        </div>
+    <motion.section
+      id="contact"
+      className="relative overflow-hidden bg-[#07111F] px-4 py-28 text-white sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      variants={staggerContainer}
+    >
+      <div className="absolute inset-0">
+        <img src="/vid1.jpg" alt="" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-[#07111F]/78" />
       </div>
-    </section>
+
+      <div className="relative z-10 mx-auto max-w-5xl text-center">
+        <motion.h2
+          variants={fadeUp}
+          transition={revealTransition}
+          className="text-4xl font-black leading-tight tracking-normal sm:text-5xl lg:text-6xl"
+        >
+          {content.title}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          transition={revealTransition}
+          className="mx-auto mt-6 max-w-3xl text-base font-medium leading-8 text-white/72 sm:text-lg"
+        >
+          {content.text}
+        </motion.p>
+        <motion.a
+          variants={fadeUp}
+          transition={revealTransition}
+          href="mailto:sarlsaleg@yahoo.fr"
+          className="mt-10 inline-flex items-center justify-center gap-2 bg-[#F2B705] px-7 py-4 text-sm font-black uppercase tracking-[0.14em] text-[#07111F] transition hover:bg-white"
+        >
+          <Mail className="h-4 w-4" />
+          {content.button}
+        </motion.a>
+      </div>
+    </motion.section>
   );
 }

@@ -1,74 +1,83 @@
-// import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { motion } from 'motion/react';
+import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
 
-export default function Footer() {
+export default function Footer({ content, company }) {
   return (
-    <footer className="bg-white pt-20 pb-8 border-t border-gray-100">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
-          
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <div className="text-3xl font-bold tracking-tighter italic text-[#1C1C1C] mb-6">muzzyhud</div>
-            <p className="text-gray-500 text-sm mb-8 max-w-sm leading-relaxed">
-              Exceptional architectural and construction company services available online.
-            </p>
-            <div className="space-y-2">
-              <a href="mailto:contact@muzzyhud.com" className="block text-[#1C1C1C] font-semibold hover:text-[#E8A57A] transition-colors">
-                contact@muzzyhud.com
-              </a>
-              <a href="tel:+48601344812" className="block text-[#1C1C1C] font-semibold hover:text-[#E8A57A] transition-colors">
-                +48 601 344 812
-              </a>
+    <motion.footer
+      className="bg-white px-4 pb-8 pt-18 sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      variants={staggerContainer}
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 border-b border-[#D7DEE8] pb-12 lg:grid-cols-[1.1fr_1fr_1fr]">
+          <motion.div variants={fadeUp} transition={revealTransition}>
+            <div className="flex items-center gap-3">
+              <span className="flex h-14 w-14 items-center justify-center border border-[#D7DEE8] bg-white">
+                <img src="/salegLogo.png" alt={company} className="h-10 w-10 object-contain" />
+              </span>
+              <div>
+                <div className="text-2xl font-black tracking-[0.18em] text-[#07111F]">{company}</div>
+                <div className="mt-1 text-xs font-black uppercase tracking-[0.22em] text-[#1D7ED0]">HT / MT / BT</div>
+              </div>
             </div>
-          </div>
-          
-          {/* Company Links */}
-          <div>
-            <h4 className="font-bold text-[#1C1C1C] mb-6 uppercase text-sm tracking-wider">Company</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">About us</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Realizations</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">News</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Contact</a></li>
-            </ul>
-          </div>
-          
-          {/* Services Links */}
-          <div>
-            <h4 className="font-bold text-[#1C1C1C] mb-6 uppercase text-sm tracking-wider">Services</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">General contracting</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Design & Implementation</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Renovation & modernization</a></li>
-            </ul>
-          </div>
-          
-          {/* Other & Social */}
-          <div>
-            <h4 className="font-bold text-[#1C1C1C] mb-6 uppercase text-sm tracking-wider">Other</h4>
-            <ul className="space-y-4 mb-8">
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Reviews</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-[#1C1C1C] text-sm transition-colors">Cooperation</a></li>
-            </ul>
-            
-            <h4 className="font-bold text-[#1C1C1C] mb-4 uppercase text-sm tracking-wider">Social media</h4>
-            <div className="flex gap-4">
-              {/* <a href="#" className="w-10 h-10 bg-[#1C1C1C] flex items-center justify-center hover:bg-[#E8A57A] transition-colors group">
-                <Facebook className="w-4 h-4 text-white" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-[#1C1C1C] flex items-center justify-center hover:bg-[#E8A57A] transition-colors group">
-                <Instagram className="w-4 h-4 text-white" />
-              </a> */}
+            <p className="mt-6 max-w-sm text-sm font-medium leading-7 text-[#526174]">{content.tagline}</p>
+          </motion.div>
+
+          <motion.div variants={fadeUp} transition={revealTransition} className="space-y-5">
+            <div className="flex gap-3">
+              <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#1D7ED0]" />
+              <p className="text-sm font-semibold leading-7 text-[#526174]">{content.address}</p>
             </div>
-          </div>
-          
+            <div className="flex gap-3">
+              <Phone className="mt-1 h-5 w-5 shrink-0 text-[#1D7ED0]" />
+              <div className="text-sm font-bold leading-7 text-[#07111F]">
+                <a href={`tel:${content.phone.replaceAll(' ', '')}`} className="block hover:text-[#1D7ED0]">
+                  {content.phone}
+                </a>
+                <a href={`tel:${content.phoneAlt.replaceAll(' ', '')}`} className="block hover:text-[#1D7ED0]">
+                  {content.phoneAlt}
+                </a>
+                <span className="block text-[#526174]">{content.landline}</span>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Mail className="mt-1 h-5 w-5 shrink-0 text-[#1D7ED0]" />
+              <div className="text-sm font-bold leading-7 text-[#07111F]">
+                {content.emails.map((email) => (
+                  <a key={email} href={`mailto:${email}`} className="block hover:text-[#1D7ED0]">
+                    {email}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} transition={revealTransition} className="grid gap-8 sm:grid-cols-2">
+            {content.columns.map((column) => (
+              <div key={column.title}>
+                <h4 className="mb-5 text-sm font-black uppercase tracking-[0.18em] text-[#07111F]">
+                  {column.title}
+                </h4>
+                <ul className="space-y-3">
+                  {column.links.map((link) => (
+                    <li key={link} className="text-sm font-semibold text-[#526174]">
+                      {link}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.div>
         </div>
-        
-        <div className="border-t border-gray-100 pt-8 text-center">
-          <p className="text-sm text-gray-400">© 2026 muzzyhud. All rights reserved.</p>
+
+        <div className="flex flex-col gap-3 pt-8 text-sm font-semibold text-[#738195] sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {company}. {content.rights}</p>
+          <p>{content.city}</p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

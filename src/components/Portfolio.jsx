@@ -1,116 +1,113 @@
 import { ArrowRight } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { motion } from 'motion/react';
+import { useMemo, useRef, useState } from 'react';
+import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
 
-export default function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState("All");
+export default function Portfolio({ content }) {
+  const [activeCategory, setActiveCategory] = useState('all');
   const scrollRef = useRef(null);
 
-  const categories = ["All", "Houses", "Blocks of flats", "Garages", "Hotels"];
-  
-  const allProjects = [
-    {
-      title: "Single-family house Krzycko",
-      category: "Houses",
-      description: "To połączenie elegancji i funkcjonalności, stworzone z myślą o komforcie rodziny, oferujące przestronne wnętrza i piękny ogród.",
-      image: "bg-neutral-300" 
-    },
-    {
-      title: "WorkTravel Hotel reception",
-      category: "Hotels",
-      description: "With a focus on creating a welcoming and efficient space, the reception seamlessly blends modern aesthetics with a warm ambiance.",
-      image: "bg-neutral-400"
-    },
-    {
-      title: "Underground garage for a block of flats",
-      category: "Garages",
-      description: "Innovative construction solutions and meticulous planning enabled the optimal utilization of the underground space.",
-      image: "bg-neutral-500"
-    },
-    {
-      title: "Two-story detached house",
-      category: "Houses",
-      description: "The two-story detached house is an example of modern architecture combining functionality with aesthetics.",
-      image: "bg-neutral-600"
-    }
-  ];
-
-  const filteredProjects = activeCategory === "All" 
-    ? allProjects 
-    : allProjects.filter(p => p.category === activeCategory);
+  const filteredProjects = useMemo(() => {
+    return activeCategory === 'all'
+      ? content.projects
+      : content.projects.filter((project) => project.category === activeCategory);
+  }, [activeCategory, content.projects]);
 
   const slideRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 450, behavior: 'smooth' });
-    }
+    scrollRef.current?.scrollBy({ left: 460, behavior: 'smooth' });
   };
 
   return (
-    <section className="bg-black px-16 py-32 text-white relative">
-      <div className="absolute top-0 right-0 flex flex-col items-end z-10 scale-50 lg:scale-100 origin-top-right">
-        <div className="flex">
-          <div className="bg-red-400 h-24 w-24"></div>
-          <div className="bg-black h-24 w-24"></div>
-        </div>
-        <div className="bg-[#badad8] h-24 w-24"></div>
-      </div>
-      <div className="bg-red-400 h-12 w-12 md:h-24 md:w-24 absolute bottom-0 left-0 z-10"></div>
+    <motion.section
+      id="realisations"
+      className="relative overflow-hidden bg-[#07111F] px-4 py-24 text-white sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      variants={staggerContainer}
+    >
+      <div className="absolute right-0 top-0 h-28 w-28 bg-[#1D7ED0]" />
+      <div className="absolute bottom-0 left-0 h-24 w-24 bg-[#F2B705]" />
 
-      <div className="container mx-auto px-4 max-w-[1400px] relative z-20">
-        <div className="mb-16">
-          <p className="text-xs font-medium text-gray-400 mb-3">Gallery</p>
-          <h2 className="text-5xl font-medium tracking-tight mb-12">Our Realizations</h2>
-          
-          <div className="flex flex-wrap items-center gap-10">
-            {categories.map((cat, index) => (
-              <button 
-                key={index}
-                onClick={() => setActiveCategory(cat)}
-                className={`text-sm font-medium transition-all ${
-                  activeCategory === cat 
-                    ? 'border border-white/60 px-8 py-3 text-white' 
-                    : 'text-gray-400 hover:text-white px-0 py-3'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <motion.div variants={fadeUp} transition={revealTransition} className="mb-12">
+          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#F2B705]">
+            {content.eyebrow}
+          </p>
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="text-4xl font-black leading-tight tracking-normal sm:text-5xl">
+              {content.title}
+            </h2>
+
+            <div className="flex flex-wrap gap-2">
+              {content.categories.map((category) => (
+                <button
+                  key={category.id}
+                  type="button"
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`border px-4 py-2.5 text-sm font-bold transition ${
+                    activeCategory === category.id
+                      ? 'border-[#F2B705] bg-[#F2B705] text-[#07111F]'
+                      : 'border-white/16 text-white/64 hover:border-white/46 hover:text-white'
+                  }`}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="relative">
-          <div 
+          <motion.div
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto pb-12 snap-x scroll-smooth"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            variants={staggerContainer}
+            className="snap-x grid-flow-col gap-6 overflow-x-auto pb-6"
+            style={{
+              display: 'grid',
+              gridAutoColumns: 'minmax(18rem, 25rem)',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
           >
             {filteredProjects.map((project, index) => (
-              <div key={index} className="min-w-[250px] md:min-w-[300px] lg:min-w-[320px] flex-1 snap-start group flex flex-col">
-                <div className="media-hover-frame w-full h-[250px] mb-8">
-                  <div className={`media-hover-scale absolute inset-0 ${project.image} bg-cover bg-center`}></div>
+              <motion.article
+                key={project.title}
+                variants={fadeUp}
+                transition={{ ...revealTransition, delay: index * 0.04 }}
+                className="snap-start bg-white text-[#07111F]"
+              >
+                <div className="media-hover-frame h-72 w-full bg-[#DCE5EF]">
+                  <img src={project.image} alt={project.title} className="media-hover-scale h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/42 to-transparent" />
+                  <span className="absolute bottom-4 left-4 bg-[#F2B705] px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-[#07111F]">
+                    {project.label}
+                  </span>
                 </div>
-                <div className="flex flex-col flex-grow items-start">
-                  <p className="text-sm font-semibold text-red-400 underline underline-offset-8 decoration-red-400 mb-6">
-                    {project.category}
+
+                <div className="p-6">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1D7ED0]">{project.meta}</p>
+                  <h3 className="mt-3 text-2xl font-black leading-tight">{project.title}</h3>
+                  <p className="mt-4 min-h-[6rem] text-sm font-medium leading-7 text-[#526174]">
+                    {project.description}
                   </p>
-                  <h3 className="text-2xl font-bold mb-4 tracking-tight">{project.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed max-w-[95%]">{project.description}</p>
                 </div>
-              </div>
+              </motion.article>
             ))}
-          </div>
-          
-          {/* Slide Button */}
+          </motion.div>
+
           {filteredProjects.length > 2 && (
-            <button 
+            <button
+              type="button"
               onClick={slideRight}
-              className="absolute right-0 top-[125px] -translate-y-1/2 w-16 h-16 bg-white flex items-center justify-center hover:bg-gray-100 transition-colors shadow-2xl z-30 cursor-pointer"
+              className="absolute right-0 top-36 z-20 flex h-14 w-14 -translate-y-1/2 items-center justify-center bg-white text-[#07111F] shadow-2xl shadow-black/30 transition hover:bg-[#F2B705]"
+              aria-label="Next projects"
             >
-              <ArrowRight className="w-6 h-6 text-black" strokeWidth={1.5} />
+              <ArrowRight className="h-5 w-5" />
             </button>
           )}
         </div>
       </div>
-      
-    </section>
+    </motion.section>
   );
 }

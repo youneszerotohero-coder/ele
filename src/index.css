@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Geist Variable', system-ui, sans-serif;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -43,8 +43,13 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: white;
-  color: #1C1C1C;
+  background-color: #F6F8FB;
+  color: #07111F;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .media-hover-frame {

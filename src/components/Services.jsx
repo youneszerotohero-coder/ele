@@ -1,75 +1,71 @@
-import { ArrowRight } from 'lucide-react';
+import { Activity, BatteryCharging, Gauge, ShieldCheck, SunMedium, Zap } from 'lucide-react';
+import { motion } from 'motion/react';
+import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
 
-export default function Services() {
-  const servicesList = [
-    {
-      id: "1",
-      title: "Build",
-      description: "We specialize in building various types of houses catered to the individual needs and preferences of our clients. Direct focus on on-time and in-budget execution.",
-      image: "bg-[url('/bg.jpg')]"
-    },
-    { 
-      id: "2",
-      title: "Invent",
-      description: "Renovation and modernization of existing buildings. Our inherent skill results directly in aesthetically pleasing, highly functional spaces.",
-      image: "bg-[url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop')]"
-    },
-    { 
-      id: "3",
-      title: "Design",
-      description: "Fit-out and interiors. See the interior where comfort blends with functional solutions tailored precisely to your vision and lifestyle.",
-      image: "bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')]"
-    }
-  ];
+const icons = [Activity, Zap, SunMedium, Gauge, BatteryCharging, ShieldCheck];
 
+export default function Services({ content }) {
   return (
-    <section className="bg-white pt-20 pb-32 overflow-hidden relative">
-    <div className="bg-red-400 h-24 w-24 absolute bottom-0 right-0 z-20"></div>
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold tracking-wider text-gray-400 uppercase mb-4">What we do</p>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#1C1C1C] tracking-tight">
-            Our Services
+    <motion.section
+      id="services"
+      className="overflow-hidden bg-white px-4 py-24 sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      variants={staggerContainer}
+    >
+      <div className="mx-auto max-w-7xl">
+        <motion.div variants={fadeUp} transition={revealTransition} className="mb-14 max-w-4xl">
+          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#1D7ED0]">
+            {content.eyebrow}
+          </p>
+          <h2 className="text-4xl font-black leading-tight tracking-normal text-[#07111F] sm:text-5xl">
+            {content.title}
           </h2>
-        </div>
-        
-        <div className="flex flex-col border-t border-black/20">
-          {servicesList.map((service) => (
-            <div 
-              key={service.id} 
-              className="group relative flex flex-col md:flex-row items-center border-b border-black/20 py-16 px-4 md:px-8 overflow-hidden cursor-pointer min-h-[300px]"
-            >
-              {/* Background Slide Image */}
-              <div className={`absolute inset-0 ${service.image} bg-cover bg-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0`}>
-                 <div className="absolute inset-0 bg-black/40"></div>
-              </div>
+        </motion.div>
 
-              {/* Left Content (Number and Description) */}
-              <div className="relative z-10 w-full md:w-1/3 flex gap-6 mb-8 md:mb-0">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full border border-black group-hover:border-white flex items-center justify-center text-sm text-black group-hover:text-white transition-colors duration-300">
-                  {service.id}
+        <div className="grid gap-px overflow-hidden border border-[#D7DEE8] bg-[#D7DEE8] md:grid-cols-2 lg:grid-cols-3">
+          {content.items.map((service, index) => {
+            const Icon = icons[index % icons.length];
+
+            return (
+              <motion.article
+                key={service.title}
+                variants={fadeUp}
+                transition={{ ...revealTransition, delay: index * 0.03 }}
+                className="group bg-[#F8FAFC] p-7 transition hover:bg-[#07111F]"
+              >
+                <div className="mb-8 flex items-center justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center bg-[#E8F1FC] text-[#1D7ED0] transition group-hover:bg-[#F2B705] group-hover:text-[#07111F]">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <span className="text-sm font-black text-[#A8B4C4] transition group-hover:text-white/42">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                 </div>
-                <p className="text-gray-600 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed font-medium max-w-[280px]">
+
+                <h3 className="text-2xl font-black leading-tight text-[#07111F] transition group-hover:text-white">
+                  {service.title}
+                </h3>
+                <p className="mt-5 min-h-[8rem] text-sm font-medium leading-7 text-[#526174] transition group-hover:text-white/70">
                   {service.description}
                 </p>
-              </div>
 
-              {/* Center Content (Huge Title) */}
-              <div className="relative z-10 w-full md:w-1/3 flex justify-center items-center">
-                <h3 className="text-6xl md:text-8xl font-bold tracking-tighter text-transparent [-webkit-text-stroke:2px_black] group-hover:text-white group-hover:[-webkit-text-stroke:0] transition-all duration-300 relative">
-                  {service.title}
-                  <div className="absolute left-0 -bottom-2 w-0 h-1 bg-white group-hover:w-full transition-all duration-500"></div>
-                </h3>
-              </div>
-
-              {/* Right Content (Arrow) */}
-              <div className="relative z-10 w-full md:w-1/3 flex justify-end items-center opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hidden md:flex">
-                <ArrowRight className="w-16 h-16 text-white" strokeWidth={1} />
-              </div>
-            </div>
-          ))}
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {service.points.map((point) => (
+                    <span
+                      key={point}
+                      className="border border-[#CAD5E2] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#526174] transition group-hover:border-white/18 group-hover:text-white/72"
+                    >
+                      {point}
+                    </span>
+                  ))}
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

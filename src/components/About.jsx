@@ -1,43 +1,62 @@
-export default function About() {
+import { CheckCircle2 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
+
+export default function About({ content }) {
   return (
-    <section className="py-24 pb-100 bg-[#Fdfdfc] overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-12 lg:gap-20">
-          
-          {/* Left Side - Images */}
-          <div className='media-hover-frame w-full max-w-[23em] h-[20em] md:h-[30em] mx-auto lg:mx-0'>
+    <motion.section
+      id="expertise"
+      className="overflow-hidden bg-[#F6F8FB] px-4 py-24 sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="show"
+      viewport={revealViewport}
+      variants={staggerContainer}
+    >
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.88fr_1fr] lg:items-center">
+        <motion.div variants={fadeUp} transition={revealTransition} className="relative">
+          <div className="media-hover-frame h-[25rem] w-full bg-[#DCE5EF] sm:h-[32rem]">
             <div
               className="media-hover-scale absolute inset-0"
-              style={{ backgroundImage: `url('/engineer.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-            ></div>
-            <div className='relative z-10 flex h-full flex-col justify-between'>
-              <div className='self-end w-12 h-12 md:w-24 md:h-24 bg-black'></div>
-              <div className='self-start flex flex-col'>
-                <div className='w-12 h-12 md:w-24 md:h-24 bg-red-400'></div>
-                <div className='w-12 h-12 md:w-24 md:h-24 bg-white border-l-4 border-b-4 border-white'></div>
+              style={{ backgroundImage: "url('/engineer.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#07111F]/36 to-transparent" />
+          </div>
+          <div className="absolute -bottom-6 -right-6 hidden h-28 w-28 bg-[#F2B705] lg:block" />
+          <div className="absolute -left-6 top-12 hidden h-24 w-24 border-[14px] border-[#1D7ED0] lg:block" />
+        </motion.div>
+
+        <motion.div variants={fadeUp} transition={revealTransition} className="max-w-3xl">
+          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#1D7ED0]">
+            {content.eyebrow}
+          </p>
+          <h2 className="text-4xl font-black leading-tight tracking-normal text-[#07111F] sm:text-5xl">
+            {content.title}
+          </h2>
+          <div className="mt-7 space-y-5 text-base font-medium leading-8 text-[#4C5B6D] sm:text-lg">
+            {content.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className="mt-9 grid gap-3">
+            {content.highlights.map((highlight) => (
+              <div key={highlight} className="flex items-start gap-3 border-t border-[#CBD5E1] pt-4">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#0E9F6E]" />
+                <span className="text-sm font-bold uppercase tracking-[0.12em] text-[#07111F]">
+                  {highlight}
+                </span>
               </div>
-            </div>
+            ))}
           </div>
-          
-          {/* Right Side - Content */}
-          <div className="lg:w-1/2 flex flex-col justify-center max-w-xl">
-            <p className="text-sm font-semibold tracking-wider text-gray-400 uppercase mb-4">Who we are</p>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-8 text-[#1C1C1C] tracking-tight">About our company</h2>
-            <p className="text-gray-600 mb-6 leading-relaxed font-medium">
-              We are primarily an architectural building company with years of its reliable practice, specializing in comprehensive services per project. Our team of qualified specialists, including architects and engineers, ensures high quality in the fields of our activities.
-            </p>
-            <p className="text-gray-600 mb-10 leading-relaxed font-medium">
-              We engage in both the construction of new facilities and the renovation and modernization of existing buildings. Our inherent skill results directly in aesthetically pleasing. We translate ambitious architectural views and expectations of our clients.
-            </p>
-            <div>
-              <button className="bg-black text-white font-bold px-8 py-4 text-sm hover:bg-[#d6966e] transition-colors">
-                Read more about us
-              </button>
-            </div>
-          </div>
-          
-        </div>
+
+          <a
+            href="#services"
+            className="mt-10 inline-flex bg-[#07111F] px-6 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#1D7ED0]"
+          >
+            {content.cta}
+          </a>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
