@@ -47,6 +47,46 @@ body {
   color: #1C1C1C;
 }
 
+.media-hover-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.media-hover-scale {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.media-hover-frame:hover .media-hover-scale,
+.media-hover-frame:focus-within .media-hover-scale {
+  transform: scale(1.08);
+}
+
+.video-play-button {
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
+.media-video-card:hover .video-play-button,
+.media-video-card:focus-within .video-play-button {
+  transform: translate(-50%, -50%) scale(1.05);
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+}
+
+.video-play-icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.media-video-card:hover .video-play-icon,
+.media-video-card:focus-within .video-play-icon {
+  transform: scale(1.05);
+}
+
 /* Hide scrollbar for the portfolio slider while allowing scroll */
 .snap-x::-webkit-scrollbar {
   display: none;

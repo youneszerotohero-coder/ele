@@ -85,7 +85,8 @@ export default function Portfolio() {
           >
             {filteredProjects.map((project, index) => (
               <div key={index} className="min-w-[250px] md:min-w-[300px] lg:min-w-[320px] flex-1 snap-start group flex flex-col">
-                <div className={`w-full h-[250px] ${project.image} bg-cover bg-center mb-8`}>
+                <div className="media-hover-frame w-full h-[250px] mb-8">
+                  <div className={`media-hover-scale absolute inset-0 ${project.image} bg-cover bg-center`}></div>
                 </div>
                 <div className="flex flex-col flex-grow items-start">
                   <p className="text-sm font-semibold text-red-400 underline underline-offset-8 decoration-red-400 mb-6">

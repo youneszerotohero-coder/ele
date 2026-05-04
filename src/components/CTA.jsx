@@ -1,8 +1,11 @@
 export default function CTA() {
   return (
     <section className=" py-32 flex justify-center items-center bg-black overflow-hidden">
-      <div className="relative w-[95vw] md:w-[80vw] h-[20em] md:h-[25em] flex flex-col justify-center items-center text-center px-4" 
-      style={{backgroundImage: "url('/cta.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="media-hover-frame relative w-[95vw] md:w-[80vw] h-[20em] md:h-[25em] flex flex-col justify-center items-center text-center px-4">
+        <div
+          className="media-hover-scale absolute inset-0"
+          style={{ backgroundImage: "url('/cta.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+        ></div>
         {/* Dark overlay to ensure text is readable against the background image */}
         <div className="absolute inset-0 bg-black/40"></div>
         
@@ -11,7 +14,7 @@ export default function CTA() {
             Don't wait for your dreams! <br />
             Make them with us now!
           </h2>
-          <button className="bg-[#E8A57A] text-[#1C1C1C] font-bold px-8 py-4 text-sm hover:bg-white transition-colors cursor-pointer">
+          <button className="bg-red-400 text-white font-bold px-8 py-4 text-sm hover:bg-red-500 transition-colors cursor-pointer">
             Start a project
           </button>
         </div>

@@ -3,14 +3,14 @@ export default function Hero() {
   return (
     <div className="relative min-h-screen bg-[#A8B2C1] flex flex-col items-center overflow-hidden pt-32 pb-32">
       {/* Background Image Placeholder */}
-      <div className="absolute inset-0 bg-neutral-300">
-        <img src="bg.png" alt="" className="w-full h-full object-cover" />
+      <div className=" absolute inset-0 bg-neutral-300">
+        <img src="bg.png" alt="" className=" w-full h-full object-cover" />
       </div>
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center text-center text-white mt-16 lg:mt-24">
         <h1 className="text-5xl md:text-6xl font-medium tracking-tight max-w-4xl leading-[1.1] mb-10 drop-shadow-sm">
           Professional <br /> construction services <br /> for your needs
         </h1>
-        <button className="bg-[#1C1C1C] text-white px-8 py-4 text-sm font-medium hover:bg-black transition-colors">
+        <button className="bg-red-400 text-white px-8 py-4 text-sm font-medium hover:bg-red-500 transition-colors">
           Start a project
         </button>
       </div>

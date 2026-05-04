@@ -82,12 +82,15 @@ export default function Testimonials() {
           </div>
           
           {/* Right Side - Image */}
-          <div key={`img-${currentTestimonial.id}`} className="w-full max-w-[25em] h-[20em] md:h-[30em] mx-auto lg:mx-0 testimonial-animate bg-neutral-200"
-            style={{
-              backgroundImage: `url('${currentTestimonial.image}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}>
+          <div key={`img-${currentTestimonial.id}`} className="media-hover-frame w-full max-w-[25em] h-[20em] md:h-[30em] mx-auto lg:mx-0 testimonial-animate bg-neutral-200">
+            <div
+              className="media-hover-scale absolute inset-0"
+              style={{
+                backgroundImage: `url('${currentTestimonial.image}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            ></div>
           </div>
           
         </div>

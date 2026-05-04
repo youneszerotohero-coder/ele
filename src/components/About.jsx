@@ -1,5 +1,3 @@
-import { Play } from 'lucide-react';
-
 export default function About() {
   return (
     <section className="py-24 pb-100 bg-[#Fdfdfc] overflow-hidden">
@@ -7,12 +5,17 @@ export default function About() {
         <div className="flex flex-col lg:flex-row lg:justify-center lg:items-center gap-12 lg:gap-20">
           
           {/* Left Side - Images */}
-          <div className='w-full max-w-[23em] h-[20em] md:h-[30em] flex flex-col justify-between mx-auto lg:mx-0'
-          style={{backgroundImage: `url('/engineer.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <div className='self-end w-12 h-12 md:w-24 md:h-24 bg-black'></div>
-            <div className='self-start flex flex-col'>
-              <div className='w-12 h-12 md:w-24 md:h-24 bg-red-400'></div>
-              <div className='w-12 h-12 md:w-24 md:h-24 bg-white border-l-4 border-b-4 border-white'></div>
+          <div className='media-hover-frame w-full max-w-[23em] h-[20em] md:h-[30em] mx-auto lg:mx-0'>
+            <div
+              className="media-hover-scale absolute inset-0"
+              style={{ backgroundImage: `url('/engineer.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            ></div>
+            <div className='relative z-10 flex h-full flex-col justify-between'>
+              <div className='self-end w-12 h-12 md:w-24 md:h-24 bg-black'></div>
+              <div className='self-start flex flex-col'>
+                <div className='w-12 h-12 md:w-24 md:h-24 bg-red-400'></div>
+                <div className='w-12 h-12 md:w-24 md:h-24 bg-white border-l-4 border-b-4 border-white'></div>
+              </div>
             </div>
           </div>
           
