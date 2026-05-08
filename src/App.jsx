@@ -9,10 +9,13 @@ import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
+import ProjectDetails from './components/ProjectDetails';
 import { siteContent } from './data/siteContent';
+import ContactModal from './components/ContactModal';
 
 function App() {
   const [lang, setLang] = useState('en');
+  const [contactModalOpen, setContactModalOpen] = useState(false);
   const [mongoProjectsByLang, setMongoProjectsByLang] = useState({});
   const content = siteContent[lang];
   const portfolioContent = {
@@ -43,7 +46,7 @@ function App() {
 
         const data = await response.json();
 
-        if (!isMounted || data.source !== 'mongodb' || !Array.isArray(data.projects) || data.projects.length === 0) {
+        if (!isMounted || !Array.isArray(data.projects)) {
           return;
         }
 
@@ -77,20 +80,32 @@ function App() {
     return <AdminPanel />;
   }
 
+  if (window.location.pathname.startsWith('/project/')) {
+    const projectId = window.location.pathname.split('/')[2];
+    return <ProjectDetails projectId={projectId} lang={lang} setLang={setLang} content={content} />;
+  }
+
   return (
     <main
       dir={content.dir}
       className="min-h-screen bg-[#F3EFE3] font-sans text-[#0A1730] selection:bg-[#E85D3F] selection:text-white"
     >
-      <Header content={content.header} lang={lang} setLang={setLang} company={content.company} />
+      <Header content={content.header} footerContent={content.footer} lang={lang} setLang={setLang} company={content.company} onContactClick={() => setContactModalOpen(true)} />
       <Hero content={content.hero} />
       <About content={content.about} />
       <Stats content={content.stats} />
       <Services content={content.services} />
       <Portfolio content={portfolioContent} />
       <Testimonials content={content.clients} />
-      <CTA content={content.cta} />
+      <CTA content={content.cta} onContactClick={() => setContactModalOpen(true)} />
       <Footer content={content.footer} company={content.company} />
+      
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+        footerContent={content.footer}
+        lang={lang}
+      />
     </main>
   );
 }

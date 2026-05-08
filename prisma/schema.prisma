@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  category      String
+  image         String
+  images        String[] @default([])
+  order         Int      @default(0)
+  titleEn       String
+  titleFr       String
+  labelEn       String
+  labelFr       String
+  metaEn        String?
+  metaFr        String?
+  descriptionEn String?
+  descriptionFr String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String?
+  name      String?
+  createdAt DateTime @default(now())
+}

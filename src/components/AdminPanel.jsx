@@ -1,5 +1,6 @@
 import { ImagePlus, Lock, LogOut, Plus, RefreshCw, Trash2 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
+import { supabase } from '../utils/supabase';
 
 const categories = [
   { id: 'substations', label: 'HT/MT substations' },
@@ -18,7 +19,7 @@ const emptyForm = {
   titleFr: '',
   descriptionEn: '',
   descriptionFr: '',
-  image: null,
+  images: [],
 };
 
 function Field({ id, label, children }) {
@@ -31,60 +32,74 @@ function Field({ id, label, children }) {
 }
 
 function inputClass() {
-  return 'min-h-11 border border-[#CAD5E4] bg-white px-3 py-2 text-sm font-semibold text-[#0A1730] outline-none transition focus:border-[#3156A4] focus:ring-2 focus:ring-[#3156A4]/18';
+  return 'w-full min-h-11 border border-[#CAD5E4] bg-white px-3 py-2 text-sm font-semibold text-[#0A1730] outline-none transition focus:border-[#3156A4] focus:ring-2 focus:ring-[#3156A4]/18';
 }
 
 export default function AdminPanel() {
   const [authChecked, setAuthChecked] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [login, setLogin] = useState({ username: 'admin', password: '' });
+  const [token, setToken] = useState(null);
+  const [login, setLogin] = useState({ email: '', password: '' });
   const [form, setForm] = useState(emptyForm);
   const [projects, setProjects] = useState([]);
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const imagePreview = useMemo(() => {
-    if (!form.image) {
-      return '';
-    }
-
-    return URL.createObjectURL(form.image);
-  }, [form.image]);
+  const imagePreviews = useMemo(() => {
+    return form.images.map(image => {
+      if (typeof image === 'string') return image;
+      return URL.createObjectURL(image);
+    });
+  }, [form.images]);
 
   useEffect(() => {
     return () => {
-      if (imagePreview) {
-        URL.revokeObjectURL(imagePreview);
-      }
+      imagePreviews.forEach((preview, index) => {
+        if (typeof form.images[index] !== 'string') {
+          URL.revokeObjectURL(preview);
+        }
+      });
     };
-  }, [imagePreview]);
+  }, [imagePreviews, form.images]);
 
-  async function loadProjects() {
-    const response = await fetch('/api/admin/projects', { credentials: 'include' });
+  async function loadProjects(currentToken) {
+    const activeToken = currentToken || token;
+    if (!activeToken) return;
 
-    if (!response.ok) {
-      return;
+    try {
+      const response = await fetch('/api/admin/projects', {
+        headers: {
+          Authorization: `Bearer ${activeToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          handleLogout();
+        }
+        throw new Error('Failed to load projects');
+      }
+
+      const data = await response.json();
+      const adminProjects = data.projects.map(p => ({
+        id: p.id,
+        image: p.image,
+        label: p.labelEn,
+        title: p.titleEn,
+        meta: p.metaEn
+      }));
+      setProjects(adminProjects);
+    } catch (error) {
+      console.error(error);
     }
-
-    const data = await response.json();
-    setProjects(data.projects ?? []);
   }
 
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        const response = await fetch('/api/admin/me', { credentials: 'include' });
-        setAuthenticated(response.ok);
-
-        if (response.ok) {
-          await loadProjects();
-        }
-      } finally {
-        setAuthChecked(true);
-      }
+    const savedToken = localStorage.getItem('admin_token');
+    if (savedToken) {
+      setToken(savedToken);
+      loadProjects(savedToken);
     }
-
-    checkAuth();
+    setAuthChecked(true);
   }, []);
 
   function updateForm(field, value) {
@@ -119,19 +134,20 @@ export default function AdminPanel() {
     try {
       const response = await fetch('/api/admin/login', {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(login),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
         throw new Error(data.message || 'Login failed');
       }
-
-      setAuthenticated(true);
-      setLogin((currentLogin) => ({ ...currentLogin, password: '' }));
-      await loadProjects();
+      
+      localStorage.setItem('admin_token', data.token);
+      setToken(data.token);
+      setLogin({ email: '', password: '' });
+      await loadProjects(data.token);
     } catch (error) {
       setMessage(error.message);
     } finally {
@@ -140,29 +156,41 @@ export default function AdminPanel() {
   }
 
   async function handleLogout() {
-    await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
-    setAuthenticated(false);
+    localStorage.removeItem('admin_token');
+    setToken(null);
     setProjects([]);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (!token) return;
+    
     setBusy(true);
     setMessage('');
 
     try {
-      const formData = new FormData();
-
-      Object.entries(form).forEach(([key, value]) => {
-        if (value) {
-          formData.append(key, value);
-        }
-      });
+      const imagesData = await Promise.all(
+        form.images.map(async (image) => {
+          if (typeof image === 'string') return image;
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+          });
+        })
+      );
 
       const response = await fetch('/api/admin/projects', {
         method: 'POST',
-        credentials: 'include',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...form,
+          images: imagesData,
+        }),
       });
 
       const data = await response.json();
@@ -182,13 +210,16 @@ export default function AdminPanel() {
   }
 
   async function handleDelete(projectId) {
+    if (!token) return;
     setBusy(true);
     setMessage('');
 
     try {
-      const response = await fetch(`/api/admin/projects/${projectId}`, {
+      const response = await fetch(`/api/admin/projects?id=${projectId}`, {
         method: 'DELETE',
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) {
@@ -213,7 +244,7 @@ export default function AdminPanel() {
     );
   }
 
-  if (!authenticated) {
+  if (!token) {
     return (
       <main className="grid min-h-screen place-items-center bg-[#F3EFE3] px-4 py-10 text-[#0A1730]">
         <form onSubmit={handleLogin} className="w-full max-w-sm border border-[#D8DEEA] bg-white p-6 shadow-xl shadow-[#0A1730]/8">
@@ -228,13 +259,15 @@ export default function AdminPanel() {
           </div>
 
           <div className="grid gap-4">
-            <Field id="username" label="Username">
+            <Field id="email" label="Email">
               <input
-                id="username"
+                id="email"
+                type="email"
                 className={inputClass()}
-                value={login.username}
-                onChange={(event) => setLogin((currentLogin) => ({ ...currentLogin, username: event.target.value }))}
-                autoComplete="username"
+                value={login.email}
+                onChange={(event) => setLogin((currentLogin) => ({ ...currentLogin, email: event.target.value }))}
+                autoComplete="email"
+                required
               />
             </Field>
             <Field id="password" label="Password">
@@ -245,6 +278,7 @@ export default function AdminPanel() {
                 value={login.password}
                 onChange={(event) => setLogin((currentLogin) => ({ ...currentLogin, password: event.target.value }))}
                 autoComplete="current-password"
+                required
               />
             </Field>
           </div>
@@ -314,13 +348,18 @@ export default function AdminPanel() {
                   ))}
                 </select>
               </Field>
-              <Field id="image" label="Image">
+              <Field id="images" label={<>Images <span className="text-xs font-medium text-[#526174]">(Append multiple)</span></>}>
                 <input
-                  id="image"
+                  id="images"
                   className={inputClass()}
                   type="file"
                   accept="image/*"
-                  onChange={(event) => updateForm('image', event.target.files?.[0] ?? null)}
+                  multiple
+                  onChange={(event) => {
+                    const newFiles = Array.from(event.target.files ?? []);
+                    updateForm('images', [...form.images, ...newFiles]);
+                    event.target.value = '';
+                  }}
                 />
               </Field>
               <Field id="labelEn" label="Type label EN">
@@ -359,9 +398,25 @@ export default function AdminPanel() {
               </Field>
             </div>
 
-            {imagePreview && (
-              <div className="mt-5 overflow-hidden border border-[#D8DEEA]">
-                <img src={imagePreview} alt="Project preview" className="h-64 w-full object-cover" />
+            {imagePreviews.length > 0 && (
+              <div className="mt-5 grid grid-cols-2 gap-4 border border-[#D8DEEA] p-4 sm:grid-cols-3">
+                {imagePreviews.map((preview, idx) => (
+                  <div key={idx} className="relative group">
+                    <img src={preview} alt={`Preview ${idx + 1}`} className="h-32 w-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newImages = [...form.images];
+                        newImages.splice(idx, 1);
+                        updateForm('images', newImages);
+                      }}
+                      className="absolute top-2 right-2 grid h-6 w-6 place-items-center bg-[#B93018] text-xs font-black text-white shadow-md opacity-0 transition hover:bg-[#0A1730] group-hover:opacity-100"
+                      aria-label="Remove image"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
               </div>
             )}
 
@@ -380,7 +435,7 @@ export default function AdminPanel() {
           <aside className="border border-[#D8DEEA] bg-white p-5 shadow-xl shadow-[#0A1730]/8">
             <div className="mb-4 flex items-center justify-between gap-3">
               <h2 className="text-xl font-black">Saved projects</h2>
-              <button type="button" onClick={loadProjects} className="grid h-10 w-10 place-items-center border border-[#CAD5E4]">
+              <button type="button" onClick={() => loadProjects()} className="grid h-10 w-10 place-items-center border border-[#CAD5E4]">
                 <RefreshCw className="h-4 w-4" />
               </button>
             </div>
@@ -411,3 +466,4 @@ export default function AdminPanel() {
     </main>
   );
 }
+

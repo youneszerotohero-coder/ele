@@ -2,7 +2,7 @@ import { Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import { fadeUp, revealTransition, staggerContainer } from '../lib/motionPresets';
 
-export default function CTA({ content }) {
+export default function CTA({ content, onContactClick }) {
   return (
     <motion.section
       id="contact"
@@ -31,15 +31,15 @@ export default function CTA({ content }) {
         >
           {content.text}
         </motion.p>
-        <motion.a
+        <motion.button
           variants={fadeUp}
           transition={revealTransition}
-          href="mailto:sarlsaleg@yahoo.fr"
+          onClick={onContactClick}
           className="mt-10 inline-flex items-center justify-center gap-2 bg-[#E85D3F] px-7 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-white hover:text-[#0A1730]"
         >
           <Mail className="h-4 w-4" />
           {content.button}
-        </motion.a>
+        </motion.button>
       </div>
     </motion.section>
   );

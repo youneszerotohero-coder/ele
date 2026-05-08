@@ -3,20 +3,23 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { languages } from '../data/siteContent';
 
-export default function Header({ content, lang, setLang, company }) {
+export default function Header({ content, footerContent, lang, setLang, company, onContactClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const renderNavLinks = () =>
-    content.nav.map((item) => (
-      <a
-        key={item.href}
-        href={item.href}
-        onClick={() => setMenuOpen(false)}
-        className="text-sm font-semibold text-white/78 transition hover:text-white"
-      >
-        {item.label}
-      </a>
-    ));
+    content.nav.map((item) => {
+      const href = item.href.startsWith('#') ? `/${item.href}` : item.href;
+      return (
+        <a
+          key={item.href}
+          href={href}
+          onClick={() => setMenuOpen(false)}
+          className="text-sm font-semibold text-white/78 transition hover:text-white"
+        >
+          {item.label}
+        </a>
+      );
+    });
 
   return (
     <motion.header
@@ -26,7 +29,7 @@ export default function Header({ content, lang, setLang, company }) {
       className="fixed inset-x-0 top-0 z-50 px-3 py-3 sm:px-5"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 border border-white/12 bg-[#0A1730]/86 px-4 py-3 shadow-2xl shadow-black/20 backdrop-blur-xl sm:px-5 lg:gap-6">
-        <a href="#accueil" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+        <a href="/#accueil" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
           <span className="flex h-11 w-9 shrink-0 items-center justify-center sm:h-12 sm:w-10">
             <img src="/salegLogo-transparent.png" alt={company} className="h-full w-auto object-contain" />
           </span>
@@ -57,13 +60,13 @@ export default function Header({ content, lang, setLang, company }) {
               </button>
             ))}
           </div>
-          <a
-            href="#contact"
+          <button
+            onClick={onContactClick}
             className="inline-flex items-center gap-2 bg-white px-4 py-2.5 text-sm font-bold text-[#0A1730] transition hover:bg-[#E85D3F] hover:text-white"
           >
             <Phone className="h-4 w-4" />
             {content.contact}
-          </a>
+          </button>
         </div>
 
         <button
@@ -102,14 +105,16 @@ export default function Header({ content, lang, setLang, company }) {
                 </button>
               ))}
             </div>
-            <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                onContactClick();
+              }}
               className="inline-flex items-center gap-2 bg-white px-4 py-2.5 text-sm font-bold text-[#0A1730]"
             >
               <Phone className="h-4 w-4" />
               {content.contact}
-            </a>
+            </button>
           </div>
         </motion.div>
       )}

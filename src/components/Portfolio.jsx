@@ -77,11 +77,12 @@ export default function Portfolio({ content }) {
             }}
           >
             {filteredProjects.map((project, index) => (
-              <motion.article
-                key={project.title}
+              <motion.a
+                key={project.id || project.title}
+                href={project.id ? `/project/${project.id}` : '#'}
                 variants={fadeUp}
                 transition={{ ...revealTransition, delay: index * 0.04 }}
-                className="snap-start bg-white text-[#0A1730]"
+                className="snap-start bg-white text-[#0A1730] block cursor-pointer transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="media-hover-frame h-72 w-full bg-[#DCE7F7]">
                   <img src={project.image} alt={project.title} className="media-hover-scale h-full w-full object-cover" />
@@ -98,7 +99,7 @@ export default function Portfolio({ content }) {
                     {project.description}
                   </p>
                 </div>
-              </motion.article>
+              </motion.a>
             ))}
           </motion.div>
 
