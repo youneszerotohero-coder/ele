@@ -1,6 +1,6 @@
 import { Activity, BatteryCharging, Gauge, ShieldCheck, SunMedium, Zap } from 'lucide-react';
 import { motion } from 'motion/react';
-import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
+import { fadeUp, revealTransition, staggerContainer } from '../lib/motionPresets';
 
 const icons = [Activity, Zap, SunMedium, Gauge, BatteryCharging, ShieldCheck];
 
@@ -10,16 +10,15 @@ export default function Services({ content }) {
       id="services"
       className="overflow-hidden bg-white px-4 py-24 sm:px-6 lg:px-8"
       initial="hidden"
-      whileInView="show"
-      viewport={revealViewport}
+      animate="show"
       variants={staggerContainer}
     >
       <div className="mx-auto max-w-7xl">
         <motion.div variants={fadeUp} transition={revealTransition} className="mb-14 max-w-4xl">
-          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#1D7ED0]">
+          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#3156A4]">
             {content.eyebrow}
           </p>
-          <h2 className="text-4xl font-black leading-tight tracking-normal text-[#07111F] sm:text-5xl">
+          <h2 className="text-4xl font-black leading-tight tracking-normal text-[#0A1730] sm:text-5xl">
             {content.title}
           </h2>
         </motion.div>
@@ -33,10 +32,10 @@ export default function Services({ content }) {
                 key={service.title}
                 variants={fadeUp}
                 transition={{ ...revealTransition, delay: index * 0.03 }}
-                className="group bg-[#F8FAFC] p-7 transition hover:bg-[#07111F]"
+                className="group bg-white/72 p-7 transition hover:bg-[#0A1730]"
               >
                 <div className="mb-8 flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center bg-[#E8F1FC] text-[#1D7ED0] transition group-hover:bg-[#F2B705] group-hover:text-[#07111F]">
+                  <span className="flex h-12 w-12 items-center justify-center bg-[#EAF2FF] text-[#3156A4] transition group-hover:bg-[#E85D3F] group-hover:text-white">
                     <Icon className="h-6 w-6" />
                   </span>
                   <span className="text-sm font-black text-[#A8B4C4] transition group-hover:text-white/42">
@@ -44,7 +43,7 @@ export default function Services({ content }) {
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-black leading-tight text-[#07111F] transition group-hover:text-white">
+                <h3 className="text-2xl font-black leading-tight text-[#0A1730] transition group-hover:text-white">
                   {service.title}
                 </h3>
                 <p className="mt-5 min-h-[8rem] text-sm font-medium leading-7 text-[#526174] transition group-hover:text-white/70">

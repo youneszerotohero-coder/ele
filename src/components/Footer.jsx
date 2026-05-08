@@ -1,15 +1,14 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { motion } from 'motion/react';
-import { fadeUp, revealTransition, revealViewport, staggerContainer } from '../lib/motionPresets';
+import { fadeUp, revealTransition, staggerContainer } from '../lib/motionPresets';
 
 export default function Footer({ content, company }) {
   return (
     <motion.footer
       id="contact"
-      className="bg-[#07111F] border-t border-white/10 text-white"
+      className="bg-[#0A1730] border-t border-white/10 text-white"
       initial="hidden"
-      whileInView="show"
-      viewport={revealViewport}
+      animate="show"
       variants={staggerContainer}
     >
       {/* Main Footer Content */}
@@ -19,12 +18,12 @@ export default function Footer({ content, company }) {
           {/* About/Company Section */}
           <motion.div variants={fadeUp} transition={revealTransition} className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <span className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/5 rounded-lg">
-                <img src="/salegLogo.png" alt={company} className="h-8 w-8 object-contain brightness-0 invert" />
+              <span className="flex h-12 w-10 shrink-0 items-center justify-center">
+                <img src="/salegLogo-transparent.png" alt={company} className="h-12 w-auto object-contain" />
               </span>
               <div>
                 <div className="text-xl font-black tracking-[0.1em] text-white">{company}</div>
-                <div className="text-[10px] font-black uppercase tracking-[0.15em] text-[#F2B705]">HT / MT / BT</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.15em] text-[#E85D3F]">HT / MT / BT</div>
               </div>
             </div>
             <p className="text-sm font-medium leading-relaxed text-white/60">
@@ -35,7 +34,7 @@ export default function Footer({ content, company }) {
           {/* Quick Links Columns */}
           {content.columns.map((column) => (
             <motion.div key={column.title} variants={fadeUp} transition={revealTransition}>
-              <h4 className="text-sm font-black uppercase tracking-[0.15em] text-[#F2B705] mb-6">
+              <h4 className="text-sm font-black uppercase tracking-[0.15em] text-[#E85D3F] mb-6">
                 {column.title}
               </h4>
               <ul className="space-y-4">
@@ -52,24 +51,24 @@ export default function Footer({ content, company }) {
 
           {/* Contact Info */}
           <motion.div variants={fadeUp} transition={revealTransition}>
-            <h4 className="text-sm font-black uppercase tracking-[0.15em] text-[#F2B705] mb-6">
+            <h4 className="text-sm font-black uppercase tracking-[0.15em] text-[#E85D3F] mb-6">
               Contact
             </h4>
             <div className="space-y-5">
               <div className="flex gap-3">
-                <MapPin className="h-5 w-5 shrink-0 text-[#1D7ED0]" />
+                <MapPin className="h-5 w-5 shrink-0 text-[#6F91D8]" />
                 <p className="text-sm font-semibold leading-relaxed text-white/70">
                   {content.address}
                 </p>
               </div>
               
               <div className="flex gap-3">
-                <Phone className="h-5 w-5 shrink-0 text-[#1D7ED0]" />
+                <Phone className="h-5 w-5 shrink-0 text-[#6F91D8]" />
                 <div className="text-sm font-bold text-white">
-                  <a href={`tel:${content.phone.replaceAll(' ', '')}`} className="block hover:text-[#F2B705] transition-colors">
+                  <a href={`tel:${content.phone.replaceAll(' ', '')}`} className="block hover:text-[#E85D3F] transition-colors">
                     {content.phone}
                   </a>
-                  <a href={`tel:${content.phoneAlt.replaceAll(' ', '')}`} className="block hover:text-[#F2B705] transition-colors">
+                  <a href={`tel:${content.phoneAlt.replaceAll(' ', '')}`} className="block hover:text-[#E85D3F] transition-colors">
                     {content.phoneAlt}
                   </a>
                   <span className="block text-white/50 font-medium mt-1">{content.landline}</span>
@@ -77,10 +76,10 @@ export default function Footer({ content, company }) {
               </div>
 
               <div className="flex gap-3">
-                <Mail className="h-5 w-5 shrink-0 text-[#1D7ED0]" />
+                <Mail className="h-5 w-5 shrink-0 text-[#6F91D8]" />
                 <div className="text-sm font-bold text-white">
                   {content.emails.map((email) => (
-                    <a key={email} href={`mailto:${email}`} className="block hover:text-[#F2B705] transition-colors">
+                    <a key={email} href={`mailto:${email}`} className="block hover:text-[#E85D3F] transition-colors">
                       {email}
                     </a>
                   ))}
@@ -117,7 +116,7 @@ export default function Footer({ content, company }) {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm font-semibold text-white/40">
             <p>© 2026 {company}. {content.rights}</p>
             <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-[#F2B705]" />
+              <MapPin className="h-4 w-4 text-[#E85D3F]" />
               <span>{content.city}</span>
             </div>
           </div>
@@ -126,4 +125,3 @@ export default function Footer({ content, company }) {
     </motion.footer>
   );
 }
-

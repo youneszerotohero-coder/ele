@@ -8,8 +8,8 @@ export const heroImage =
   'https://images.pexels.com/photos/18468536/pexels-photo-18468536.jpeg?auto=compress&cs=tinysrgb&w=2400&h=1400&fit=crop';
 
 export const languages = [
+  { code: 'en', label: 'EN' },
   { code: 'fr', label: 'FR' },
-  { code: 'ar', label: 'AR' },
 ];
 
 const sharedStats = [
@@ -22,6 +22,215 @@ const sharedStats = [
 const projectImages = [project1, project2, project3, project4, project5];
 
 export const siteContent = {
+  en: {
+    dir: 'ltr',
+    locale: 'en-DZ',
+    company: 'SALEG',
+    header: {
+      nav: [
+        { label: 'Home', href: '#accueil' },
+        { label: 'About', href: '#about' },
+        { label: 'Services', href: '#services' },
+        { label: 'Projects', href: '#realisations' },
+        { label: 'Clients', href: '#clients' },
+      ],
+      contact: 'Contact',
+    },
+    hero: {
+      eyebrow: 'Sarl SALEG | Bab-Ezzouar, Algiers',
+      title: 'SALEG',
+      subtitle: 'Electrical assembly HT/MT/BT & generator sets',
+      text:
+        'Since 2004, SALEG has supported industrial, public and energy projects from studies, planning and estimation through testing, commissioning and maintenance.',
+      primary: 'Request an offer',
+      secondary: 'View services',
+      badges: ['HT/MT/BT', 'Electrical substations', 'PV plants', 'Grid Code'],
+    },
+    about: {
+      eyebrow: 'About SALEG',
+      title: 'An Algerian electrical company serving critical installations since 2004.',
+      paragraphs: [
+        'SALEG Sarl is a company for electrical realization and assembly in medium and low voltage, with field experience across industrial, public and energy facilities.',
+        'The company has built a broad client portfolio by delivering electrical studies, substations, network integration, protection systems, MT/BT installations and generator set services.',
+        'The manager of the company is Salmi Mohamed Lotfi.',
+      ],
+      highlights: [
+        'Established in 2004',
+        'Managed by Salmi Mohamed Lotfi',
+        'Many public, industrial and energy clients',
+        'Head office in Bab-Ezzouar, Algiers',
+      ],
+      cta: 'Explore services',
+      documentsLabel: 'Company documents',
+      closeLabel: 'Close preview',
+      documents: [
+        {
+          label: 'Show presentation',
+          href: '/documents/saleg-presentation.pdf',
+          type: 'presentation',
+          pageCount: 10,
+          pagePath: '/documents/saleg-presentation-pages/saleg-presentation-page-',
+        },
+        {
+          label: 'Show details',
+          href: '/documents/saleg-details.pdf',
+          type: 'details',
+          pageCount: 27,
+          pagePath: '/documents/saleg-details-pages/saleg-details-page-',
+        },
+      ],
+    },
+    stats: {
+      eyebrow: 'Key figures',
+      title: 'Field references for industrial and public electrical projects.',
+      items: [
+        { ...sharedStats[0], label: 'Share capital' },
+        { ...sharedStats[1], label: 'Medium-voltage networks' },
+        { ...sharedStats[2], label: 'Clients and partners cited' },
+        { ...sharedStats[3], label: 'Major achievements' },
+      ],
+    },
+    services: {
+      eyebrow: 'Areas of work',
+      title: 'Modular services for EPC, industrial and public-sector needs.',
+      items: [
+        {
+          title: 'Electrical systems engineering',
+          description:
+            'Load-flow, short-circuit, protection, coordination, selectivity and Grid Code studies using ETAP / DIgSILENT modelling.',
+          points: ['Load flow', 'Short circuit', 'Grid Code'],
+        },
+        {
+          title: 'HT/MT electrical substations',
+          description:
+            'Design support, protection relay configuration, functional tests, energization procedures and grid synchronization.',
+          points: ['Protection relays', 'Secondary tests', 'Commissioning'],
+        },
+        {
+          title: 'Photovoltaic plants',
+          description:
+            'DC-side commissioning, I-V curves, thermographic inspection, inverter integration and performance validation.',
+          points: ['DC tests', 'Inverters', 'Performance'],
+        },
+        {
+          title: 'MT/BT installations',
+          description:
+            'Execution of 30 kV, 10 kV and 5.5 kV networks, AC/DC panels, cabling, connection, grounding, lighting and auxiliary services.',
+          points: ['LV panels', 'Cabling', 'Grounding'],
+        },
+        {
+          title: 'Generator sets & backup power',
+          description:
+            'Supply, installation, rental, maintenance, servicing and repair of generator sets across power ranges.',
+          points: ['Installation', 'Rental', 'Maintenance'],
+        },
+        {
+          title: 'Protection, settings & selectivity',
+          description:
+            'Relay-setting calculations, TCC curves, short-circuit analysis, selectivity checks and protection scheme optimization.',
+          points: ['Relay settings', 'TCC curves', 'Selectivity'],
+        },
+      ],
+    },
+    portfolio: {
+      eyebrow: 'Project portfolio',
+      title: 'Selected achievements',
+      categories: [
+        { id: 'all', label: 'All' },
+        { id: 'substations', label: 'HT/MT substations' },
+        { id: 'public', label: 'Public' },
+        { id: 'industry', label: 'Industry' },
+        { id: 'energy', label: 'Energy' },
+      ],
+      projects: [
+        {
+          title: 'MT/BT transformer substations',
+          category: 'substations',
+          label: 'HT/MT substations',
+          meta: '30 kV / 10 kV / 5.5 kV',
+          description:
+            'Studies, supply, installation, verification and maintenance of transformer substations and MV cells.',
+          image: projectImages[0],
+        },
+        {
+          title: 'University of Tipaza 4000 seats',
+          category: 'public',
+          label: 'Public',
+          meta: 'DEP Tipaza',
+          description:
+            'Electrical works for the Tipaza university program, including distribution equipment and installations.',
+          image: projectImages[1],
+        },
+        {
+          title: 'Skikda refinery',
+          category: 'industry',
+          label: 'Industry',
+          meta: 'SONATRACH',
+          description:
+            'Work on industrial electrical installations in a demanding energy-production environment.',
+          image: projectImages[2],
+        },
+        {
+          title: 'Bellara steel complex',
+          category: 'industry',
+          label: 'Industry',
+          meta: 'Jijel',
+          description:
+            'Contribution to electrical installations at the Bellara complex for SINOSTEEL MECC & SEDRI.',
+          image: projectImages[3],
+        },
+        {
+          title: 'Djen Djen port - 30 kV supply',
+          category: 'energy',
+          label: 'Energy',
+          meta: 'AQS Jijel',
+          description:
+            '30 kV electrical supply for a strategic port and industrial infrastructure.',
+          image: projectImages[4],
+        },
+      ],
+    },
+    clients: {
+      eyebrow: 'References',
+      title: 'Public, industrial and energy clients.',
+      intro:
+        'SALEG works with public project owners, national institutions, distribution departments, industrial groups and international EPC partners.',
+      groups: [
+        {
+          title: 'Institutions & administrations',
+          names: ['Presidency of the Republic', 'MDN', 'DGSN', 'DEP Alger', 'DEP Tipaza'],
+        },
+        {
+          title: 'Energy & industry',
+          names: ['SONATRACH', 'SONELGAZ', 'AQS Jijel', 'SNTA SPA', 'COSIDER Construction', 'ENCC SPA'],
+        },
+        {
+          title: 'EPC & partners',
+          names: ['SAMSUNG Engineering', 'ABB', 'DURO FELGUERA', 'CSCEC', 'YENIGUN'],
+        },
+      ],
+    },
+    cta: {
+      title: 'Do you have an electrical project to size, install or commission?',
+      text:
+        'SALEG can study your needs, plan the works and carry operations through to completion.',
+      button: 'Contact SALEG',
+    },
+    footer: {
+      tagline: 'Electrical engineering, assembly and commissioning for HT/MT/BT installations.',
+      address: 'Coopérative Immobilière Essanaouber, 1200 Logements, Local N° 01, Bab-Ezzouar, Algiers',
+      phone: '+213 661 300 972',
+      phoneAlt: '+213 662 163 223',
+      landline: '020 20 14 69',
+      emails: ['sarlsaleg@yahoo.fr', 'sarlsaleg@hotmail.fr'],
+      columns: [
+        { title: 'Services', links: ['Electrical engineering', 'HT/MT substations', 'MT/BT installations', 'Generator sets'] },
+        { title: 'Expertise', links: ['Grid Code', 'Protection', 'Commissioning', 'Maintenance'] },
+      ],
+      city: 'Bab-Ezzouar, Algiers',
+      rights: 'All rights reserved.',
+    },
+  },
   fr: {
     dir: 'ltr',
     locale: 'fr-DZ',
@@ -29,7 +238,7 @@ export const siteContent = {
     header: {
       nav: [
         { label: 'Accueil', href: '#accueil' },
-        { label: 'Expertise', href: '#expertise' },
+        { label: 'À propos', href: '#about' },
         { label: 'Services', href: '#services' },
         { label: 'Réalisations', href: '#realisations' },
         { label: 'Clients', href: '#clients' },
@@ -41,24 +250,44 @@ export const siteContent = {
       title: 'SALEG',
       subtitle: 'Montage électrique HT/MT/BT & groupes électrogènes',
       text:
-        'Une équipe d’ingénieurs et de techniciens accompagne les projets industriels depuis les études, la planification et l’estimation jusqu’aux essais, la mise en service et la maintenance.',
+        'Depuis 2004, une équipe d’ingénieurs et de techniciens accompagne les projets industriels depuis les études, la planification et l’estimation jusqu’aux essais, la mise en service et la maintenance.',
       primary: 'Demander une offre',
       secondary: 'Voir les services',
       badges: ['HT/MT/BT', 'Postes électriques', 'Centrales PV', 'Grid Code'],
     },
     about: {
       eyebrow: 'À propos',
-      title: 'Une société algérienne dédiée aux installations électriques critiques.',
+      title: 'Une société algérienne dédiée aux installations électriques critiques depuis 2004.',
       paragraphs: [
-        'SALEG est spécialisée dans l’ingénierie des systèmes électriques industriels, couvrant la Haute Tension, la Moyenne Tension et la Basse Tension.',
-        'L’entreprise intervient sur les centrales de production, les postes HT/MT, l’intégration réseau, les systèmes de protection, les installations MT/BT et les groupes électrogènes.',
+        'SALEG est spécialisée dans la réalisation et le montage électrique en Moyenne et Basse Tension, avec une expérience terrain sur des sites industriels, publics et énergétiques.',
+        'Depuis sa création en 2004, l’entreprise a développé un large portefeuille clients à travers les études électriques, les postes HT/MT, l’intégration réseau, les systèmes de protection, les installations MT/BT et les groupes électrogènes.',
+        'Le gérant de la société est Salmi Mohamed Lotfi.',
       ],
       highlights: [
+        'Créée en 2004',
+        'Gérant : Salmi Mohamed Lotfi',
+        'Nombreux clients publics, industriels et énergétiques',
         'Siège social à Bab-Ezzouar, Alger',
-        'Capital social de 20 100 000 DZD',
-        'Interface technique avec SONELGAZ / GRTE',
       ],
       cta: 'Notre expertise',
+      documentsLabel: 'Documents entreprise',
+      closeLabel: 'Fermer l’aperçu',
+      documents: [
+        {
+          label: 'Voir la présentation',
+          href: '/documents/saleg-presentation.pdf',
+          type: 'presentation',
+          pageCount: 10,
+          pagePath: '/documents/saleg-presentation-pages/saleg-presentation-page-',
+        },
+        {
+          label: 'Voir les détails',
+          href: '/documents/saleg-details.pdf',
+          type: 'details',
+          pageCount: 27,
+          pagePath: '/documents/saleg-details-pages/saleg-details-page-',
+        },
+      ],
     },
     stats: {
       eyebrow: 'Chiffres clés',
@@ -182,11 +411,11 @@ export const siteContent = {
         },
         {
           title: 'Énergie & industrie',
-          names: ['SONATRACH', 'AQS Jijel', 'SNTA SPA', 'COSIDER Construction', 'ENCC SPA'],
+          names: ['SONATRACH', 'SONELGAZ', 'AQS Jijel', 'SNTA SPA', 'COSIDER Construction', 'ENCC SPA'],
         },
         {
           title: 'EPC & partenaires',
-          names: ['SAMSUNG Engineering', 'SOMAFE ABB', 'DURO FELGUERA', 'CSCEC', 'YENIGUN'],
+          names: ['SAMSUNG Engineering', 'ABB', 'DURO FELGUERA', 'CSCEC', 'YENIGUN'],
         },
       ],
     },
@@ -209,195 +438,6 @@ export const siteContent = {
       ],
       city: 'Bab-Ezzouar, Alger',
       rights: 'Tous droits réservés.',
-    },
-  },
-  ar: {
-    dir: 'rtl',
-    locale: 'ar-DZ',
-    company: 'SALEG',
-    header: {
-      nav: [
-        { label: 'الرئيسية', href: '#accueil' },
-        { label: 'الخبرة', href: '#expertise' },
-        { label: 'الخدمات', href: '#services' },
-        { label: 'المشاريع', href: '#realisations' },
-        { label: 'العملاء', href: '#clients' },
-      ],
-      contact: 'اتصل بنا',
-    },
-    hero: {
-      eyebrow: 'ش.ذ.م.م SALEG | باب الزوار، الجزائر',
-      title: 'SALEG',
-      subtitle: 'تركيب كهربائي للجهد العالي والمتوسط والمنخفض ومولدات الطاقة',
-      text:
-        'يرافق فريق من المهندسين والتقنيين المشاريع الصناعية من الدراسات والتخطيط والتقدير إلى الاختبارات والتشغيل والصيانة.',
-      primary: 'طلب عرض',
-      secondary: 'عرض الخدمات',
-      badges: ['HT/MT/BT', 'محطات كهربائية', 'محطات شمسية', 'Grid Code'],
-    },
-    about: {
-      eyebrow: 'من نحن',
-      title: 'شركة جزائرية متخصصة في المنشآت الكهربائية الحساسة.',
-      paragraphs: [
-        'تتخصص SALEG في هندسة الأنظمة الكهربائية الصناعية للجهد العالي والمتوسط والمنخفض.',
-        'تعمل الشركة في محطات الإنتاج، محطات HT/MT، إدماج الشبكة، أنظمة الحماية، منشآت MT/BT ومولدات الطاقة.',
-      ],
-      highlights: [
-        'المقر الاجتماعي في باب الزوار، الجزائر',
-        'رأس مال اجتماعي قدره 20 100 000 دج',
-        'تنسيق تقني مع SONELGAZ / GRTE',
-      ],
-      cta: 'خبرتنا',
-    },
-    stats: {
-      eyebrow: 'أرقام رئيسية',
-      title: 'خبرة ميدانية في المشاريع الصناعية والعمومية.',
-      items: [
-        { ...sharedStats[0], label: 'رأس المال الاجتماعي' },
-        { ...sharedStats[1], label: 'شبكات كهربائية متوسطة الجهد' },
-        { ...sharedStats[2], label: 'عملاء وشركاء مذكورون' },
-        { ...sharedStats[3], label: 'إنجازات كبرى' },
-      ],
-    },
-    services: {
-      eyebrow: 'مجالات التدخل',
-      title: 'خدمات مرنة لاحتياجات مشاريع EPC والصناعة والمؤسسات العمومية.',
-      items: [
-        {
-          title: 'هندسة الأنظمة الكهربائية',
-          description:
-            'دراسات تدفق القدرة، القصر الكهربائي، الحماية، التنسيق، الانتقائية والتوافق مع Grid Code باستعمال ETAP / DIgSILENT.',
-          points: ['تدفق القدرة', 'القصر الكهربائي', 'Grid Code'],
-        },
-        {
-          title: 'محطات HT/MT الكهربائية',
-          description:
-            'مساعدة في التصميم، ضبط مرحلات الحماية، اختبارات وظيفية، إجراءات الوضع تحت التوتر والمزامنة مع الشبكة.',
-          points: ['مرحلات الحماية', 'اختبارات ثانوية', 'تشغيل'],
-        },
-        {
-          title: 'المحطات الكهروضوئية',
-          description:
-            'تشغيل الجزء DC، قياس منحنيات I-V، الفحص الحراري، إدماج العواكس والتحقق من الأداء.',
-          points: ['اختبارات DC', 'العواكس', 'الأداء'],
-        },
-        {
-          title: 'منشآت MT/BT',
-          description:
-            'إنجاز شبكات 30 كV و10 كV و5.5 كV، لوحات AC/DC، الكوابل، الربط، التأريض، الإنارة والخدمات المساعدة.',
-          points: ['لوحات BT', 'كوابل', 'تأريض'],
-        },
-        {
-          title: 'مولدات الطاقة والنجدة',
-          description:
-            'توفير وتركيب وكراء وصيانة وإصلاح مولدات الطاقة بمختلف القدرات.',
-          points: ['تركيب', 'كراء', 'صيانة'],
-        },
-        {
-          title: 'الحماية والضبط والانتقائية',
-          description:
-            'حسابات ضبط المرحلات، منحنيات TCC، تحليل القصر الكهربائي، التحقق من الانتقائية وتحسين مخططات الحماية.',
-          points: ['ضبط المرحلات', 'منحنيات TCC', 'انتقائية'],
-        },
-      ],
-    },
-    portfolio: {
-      eyebrow: 'محفظة المشاريع',
-      title: 'إنجازات مختارة',
-      categories: [
-        { id: 'all', label: 'الكل' },
-        { id: 'substations', label: 'محطات HT/MT' },
-        { id: 'public', label: 'عمومي' },
-        { id: 'industry', label: 'صناعة' },
-        { id: 'energy', label: 'طاقة' },
-      ],
-      projects: [
-        {
-          title: 'محطات تحويل MT/BT',
-          category: 'substations',
-          label: 'محطات HT/MT',
-          meta: '30 كV / 10 كV / 5.5 كV',
-          description:
-            'دراسات وتوريد وتركيب وفحص وصيانة محطات التحويل وخلايا الجهد المتوسط.',
-          image: projectImages[0],
-        },
-        {
-          title: 'جامعة تيبازة 4000 مقعد',
-          category: 'public',
-          label: 'عمومي',
-          meta: 'DEP Tipaza',
-          description:
-            'أشغال كهربائية للبرنامج الجامعي بتيبازة تشمل تجهيزات ومنشآت التوزيع.',
-          image: projectImages[1],
-        },
-        {
-          title: 'مصفاة سكيكدة',
-          category: 'industry',
-          label: 'صناعة',
-          meta: 'SONATRACH',
-          description:
-            'تدخل في منشآت كهربائية صناعية داخل بيئة إنتاج طاقوي عالية المتطلبات.',
-          image: projectImages[2],
-        },
-        {
-          title: 'مركب بلارة للحديد والصلب',
-          category: 'industry',
-          label: 'صناعة',
-          meta: 'جيجل',
-          description:
-            'مساهمة في المنشآت الكهربائية لمركب بلارة لصالح تجمع SINOSTEEL MECC & SEDRI.',
-          image: projectImages[3],
-        },
-        {
-          title: 'ميناء جن جن - تغذية 30 كV',
-          category: 'energy',
-          label: 'طاقة',
-          meta: 'AQS Jijel',
-          description:
-            'تغذية كهربائية بجهد 30 كV لمنشأة مينائية وصناعية استراتيجية.',
-          image: projectImages[4],
-        },
-      ],
-    },
-    clients: {
-      eyebrow: 'مراجع',
-      title: 'عملاء من القطاع العمومي والصناعي والطاقوي.',
-      intro:
-        'تشمل محفظة SALEG مؤسسات عمومية، هيئات وطنية، مديريات توزيع، مجموعات صناعية وشركاء EPC دوليين.',
-      groups: [
-        {
-          title: 'مؤسسات وإدارات',
-          names: ['رئاسة الجمهورية', 'MDN', 'DGSN', 'DEP Alger', 'DEP Tipaza'],
-        },
-        {
-          title: 'الطاقة والصناعة',
-          names: ['SONATRACH', 'AQS Jijel', 'SNTA SPA', 'COSIDER Construction', 'ENCC SPA'],
-        },
-        {
-          title: 'شركاء EPC',
-          names: ['SAMSUNG Engineering', 'SOMAFE ABB', 'DURO FELGUERA', 'CSCEC', 'YENIGUN'],
-        },
-      ],
-    },
-    cta: {
-      title: 'هل لديكم مشروع كهربائي يحتاج إلى دراسة أو تركيب أو تشغيل؟',
-      text:
-        'SALEG جاهزة لدراسة احتياجاتكم، تخطيط الأشغال ومرافقة العمليات إلى غاية التسليم.',
-      button: 'اتصل بـ SALEG',
-    },
-    footer: {
-      tagline: 'هندسة وتركيب وتشغيل كهربائي HT/MT/BT.',
-      address: 'التعاونية العقارية السناوبر، 1200 مسكن، محل رقم 01، باب الزوار، الجزائر',
-      phone: '+213 661 300 972',
-      phoneAlt: '+213 662 163 223',
-      landline: '020 20 14 69',
-      emails: ['sarlsaleg@yahoo.fr', 'sarlsaleg@hotmail.fr'],
-      columns: [
-        { title: 'الخدمات', links: ['هندسة كهربائية', 'محطات HT/MT', 'منشآت MT/BT', 'مولدات الطاقة'] },
-        { title: 'الخبرة', links: ['Grid Code', 'الحماية', 'التشغيل', 'الصيانة'] },
-      ],
-      city: 'باب الزوار، الجزائر',
-      rights: 'كل الحقوق محفوظة.',
     },
   },
 };
