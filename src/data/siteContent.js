@@ -66,7 +66,7 @@ export const siteContent = {
       documents: [
         {
           label: 'Show presentation',
-          href: '/documents/saleg-presentation.pdf',
+          href: '/documents/saleg-pres.pdf',
           type: 'presentation',
           pageCount: 10,
           pagePath: '/documents/saleg-presentation-pages/saleg-presentation-page-',
