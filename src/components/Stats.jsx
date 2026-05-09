@@ -55,12 +55,12 @@ export default function Stats({ content }) {
               style={{ backgroundImage: "url('/vid1.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
             />
             <div className="absolute inset-0 bg-[#0A1730]/18 transition-colors duration-300 hover:bg-[#0A1730]/32" />
-            <div
+            {/* <div
               aria-hidden="true"
               className="video-play-button absolute left-1/2 top-1/2 z-20 flex h-16 w-16 items-center justify-center rounded-full bg-white/94 md:h-20 md:w-20"
             >
               <Play className="video-play-icon h-7 w-7 text-[#0A1730] md:h-9 md:w-9" fill="currentColor" strokeWidth={1.75} />
-            </div>
+            </div> */}
           </div>
           <div className="absolute -bottom-5 -left-5 hidden h-24 w-24 border-[14px] border-[#E85D3F] lg:block" />
         </motion.div>
